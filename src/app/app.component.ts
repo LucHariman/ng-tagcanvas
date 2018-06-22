@@ -1,17 +1,16 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-
-type Tag = { text: string };
+import { Tag } from '../tag-canvas/tag';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 	
 	title = 'app';
 
-	allTags: Tag[] = [
+	tags: Tag[] = [
 		{ text: 'insurance' },
 		{ text: 'lay' },
 		{ text: 'tense' },
@@ -23,28 +22,16 @@ export class AppComponent implements OnInit {
 		{ text: 'match' },
 		{ text: 'cover' }
 	];
-
-	tags: Tag[] = [];
 	
 	options: TagCanvasOptions = {
 		dragControl: true,
 		clickToFront: 500,
+		textFont: null,
 		initial: [ .1, 0 ]
 	};
 	
 	constructor() {
 		
-	}
-
-	ngOnInit(): void {
-		this.addTags();
-	}
-
-	async addTags() {
-		for (let tag of this.allTags) {
-			this.tags.push(tag);
-			await new Promise(resolve => setTimeout(() => resolve(), 1000));
-		}
 	}
 	
 }

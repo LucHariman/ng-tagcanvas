@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, AfterViewInit, OnDestroy, IterableDiffers } from "@angular/core";
+import { AfterViewInit, Component, DoCheck, Input, OnDestroy } from "@angular/core";
 import { v4 as uuid } from 'uuid';
 import { Tag } from "./tag";
 
@@ -14,26 +14,10 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
     readonly canvasId = `canvas-${this.instanceId}`;
     readonly tagListId = `tags-${this.instanceId}`;
 
-    private _tags: Tag[] = [];
-
-    private initialized = false;
     private _options: TagCanvasOptions;
 
-    private readonly iterableDiffer: any;
-
-    constructor(iterableDiffers: IterableDiffers) {
-        this.iterableDiffer = iterableDiffers.find([]).create(null);
-    }
-
     @Input()
-    set tags(value: Tag[]) {
-        this._tags = value || [];
-        this.update();
-    }
-
-    get tags() {
-        return this._tags;
-    }
+    tags: Tag[];
 
     @Input()
     set options(value: TagCanvasOptions) {
@@ -47,7 +31,6 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
 
     ngAfterViewInit(): void {
         this.start();
-        this.initialized = true;
     }
     
     async start() {
@@ -56,16 +39,16 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     async update() {
-        if (!this.initialized) {
-            return;
-        }
         await blinkEyes();
         TagCanvas.Update(this.canvasId);
     }
 
+    private _previousTagListState: string;
+
     ngDoCheck(): void {
-        let changes = this.iterableDiffer.diff(this._tags);
-        if (changes) {
+        let tagListState = JSON.stringify(this.tags.map(({ text: text }) => ({ text: text })));
+        if (this._previousTagListState !== tagListState) {
+            this._previousTagListState = tagListState;
             this.update();
         }
     }
@@ -77,5 +60,6 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
 }
 
 async function blinkEyes() {
+    // waits for change detection cycle
     await new Promise(resolve => setTimeout(() => resolve()));
 }

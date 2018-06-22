@@ -14,4 +14,6 @@ import { BrowserModule } from '@angular/platform-browser';
         TagCanvasComponent
     ]
 })
-export class TagCanvasModule { }
+export class TagCanvasModule {
+    // TODO: Implement a forRoot() static method for initializing default options 
+}
