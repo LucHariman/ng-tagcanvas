@@ -88,7 +88,10 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
 
 }
 
-async function blinkEyes() {
-    // waits for change detection cycle
+/**
+    @description Waits for change detection cycle
+    @returns Promise<void>
+*/
+async function blinkEyes(): Promise<void> {
     await new Promise(resolve => setTimeout(() => resolve()));
 }
