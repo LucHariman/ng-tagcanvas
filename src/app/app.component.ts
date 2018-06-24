@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Tag } from '../tag-canvas/tag';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	templateUrl: 'app.component.html',
+	styleUrls: [ 'app.component.css' ]
 })
 export class AppComponent {
 	
@@ -26,8 +26,8 @@ export class AppComponent {
 	options: TagCanvasOptions = {
 		dragControl: true,
 		clickToFront: 500,
-		textFont: null,
-		initial: [ .1, 0 ]
+		initial: [ .1, 0 ],
+		
 	};
 	
 	constructor() {

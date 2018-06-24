@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, Input, OnDestroy } from "@angular/core";
+import { AfterViewInit, Component, DoCheck, Input, OnDestroy, ElementRef, ViewChild } from "@angular/core";
 import { v4 as uuid } from 'uuid';
 import { Tag } from "./tag";
 
@@ -9,15 +9,25 @@ import { Tag } from "./tag";
 })
 export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
 
-    private readonly instanceId = uuid();
+    private readonly _instanceId = uuid();
 
-    readonly canvasId = `canvas-${this.instanceId}`;
-    readonly tagListId = `tags-${this.instanceId}`;
+    readonly canvasId = `canvas-${this._instanceId}`;
+    readonly tagListId = `tags-${this._instanceId}`;
+
+    readonly defaultOptions: TagCanvasOptions = {
+        textFont: null,
+        textColour: null
+    };
+
+    canvasWidth: number;
+    canvasHeight: number;
 
     private _options: TagCanvasOptions;
 
     @Input()
     tags: Tag[];
+
+    // TODO: Add stretch (boolean) input
 
     @Input()
     set options(value: TagCanvasOptions) {
@@ -29,13 +39,28 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
         return this._options;
     }
 
+    @ViewChild('canvas')
+    canvas: ElementRef;
+
+    constructor(private elementRef: ElementRef) {
+
+    }
+
     ngAfterViewInit(): void {
+        let canvasElement = this.canvas.nativeElement as HTMLCanvasElement;
+        canvasElement.width = Math.round(canvasElement.clientWidth);
+        canvasElement.height = Math.round(canvasElement.clientHeight);
+
+        let style = window.getComputedStyle(this.elementRef.nativeElement);
+        this.defaultOptions.textHeight = parseFloat(style['font-size']);
+
         this.start();
     }
     
     async start() {
+        let mergedOptions = Object.assign({}, this.defaultOptions, this._options);
         await blinkEyes();
-        TagCanvas.Start(this.canvasId, this.tagListId, this._options);
+        TagCanvas.Start(this.canvasId, this.tagListId, mergedOptions);
     }
 
     async update() {
@@ -46,7 +71,7 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
     private _previousTagListState: string;
 
     ngDoCheck(): void {
-        let tagListState = JSON.stringify(this.tags.map(({ text: text }) => ({ text: text })));
+        let tagListState = JSON.stringify(this.tags.map(({ text: text }) => ({ text: text }))); // TODO: Improve performance, use KeyValueDiffer/IterableDiffer
         if (this._previousTagListState !== tagListState) {
             this._previousTagListState = tagListState;
             this.update();

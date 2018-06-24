@@ -96,7 +96,7 @@ declare interface TagCanvasOptions {
     scrollPause?: number;
     shadow?: string;
     shadowBlur?: number;
-    shadowOffset?: Array<number>;
+    shadowOffset?: [ number, number ];
     shape?: 'sphere' | 'hcynlinder' | 'vcylinder' | 'hring' | 'vring';
     shuffleTags?: boolean;
     splitWidth?: number;
@@ -114,7 +114,7 @@ declare interface TagCanvasOptions {
     txtScale?: number;
     weight?: boolean;
     weightFrom?: string;
-    weightGradient?: any;
+    weightGradient?: WeightGradient | WeightGradient[];
     weightMode?: 'size' | 'colour' | 'both' | 'bgcolour' | 'bgoutline' | 'outline';
     weightSize?: number;
     weightSizeMax?: number;
@@ -125,3 +125,5 @@ declare interface TagCanvasOptions {
     zoomMin?: number;
     zoomStep?: number;
 }
+
+declare type WeightGradient = { [ index: number ]: string };
