@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-tag-canvas": {
+    "ng-tagcanvas": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-tag-canvas",
+            "outputPath": "dist/ng-tagcanvas",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-tag-canvas:build"
+            "browserTarget": "ng-tagcanvas:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-tag-canvas:build:production"
+              "browserTarget": "ng-tagcanvas:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-tag-canvas:build"
+            "browserTarget": "ng-tagcanvas:build"
           }
         },
         "test": {
@@ -117,7 +117,7 @@
         }
       }
     },
-    "ngx-tag-canvas-e2e": {
+    "ng-tagcanvas-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -125,7 +125,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-tag-canvas:serve"
+            "devServerTarget": "ng-tagcanvas:serve"
           }
         },
         "lint": {
@@ -140,5 +140,5 @@
       }
     }
   },
-  "defaultProject": "ngx-tag-canvas"
+  "defaultProject": "ng-tagcanvas"
 }
