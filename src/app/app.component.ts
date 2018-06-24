@@ -35,5 +35,9 @@ export class AppComponent {
 	constructor() {
 		
 	}
+
+	tagClicked(tag) {
+		console.log(tag);
+	}
 	
 }

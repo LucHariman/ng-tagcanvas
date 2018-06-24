@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, Input, OnDestroy, ElementRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, DoCheck, Input, OnDestroy, ElementRef, ViewChild, Output, EventEmitter } from "@angular/core";
 import { v4 as uuid } from 'uuid';
 import { Tag } from "./tag";
 
@@ -39,6 +39,9 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
     get options() {
         return this._options;
     }
+
+    @Output()
+    tagClick: EventEmitter<Tag> = new EventEmitter();
 
     @ViewChild('canvas')
     canvas: ElementRef;

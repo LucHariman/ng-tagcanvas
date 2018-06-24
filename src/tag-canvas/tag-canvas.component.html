@@ -1,5 +1,5 @@
 <canvas #canvas id="{{ canvasId }}"></canvas>
 <div id="{{ tagListId }}" class="tag-container">
 	<a href="javascript:void(0)" *ngFor="let tag of tags"
-		[attr.data-weight]="tag.weight">{{ tag.text }}</a>
+		[attr.data-weight]="tag.weight" (click)="tagClick.next(tag)">{{ tag.text }}</a>
 </div>
