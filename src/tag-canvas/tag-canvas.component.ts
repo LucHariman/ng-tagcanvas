@@ -75,7 +75,7 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
     private _previousTagListState: string;
 
     ngDoCheck(): void {
-        let tagListState = JSON.stringify(this.tags.map(({ text: text }) => ({ text: text }))); // TODO: Improve performance, use KeyValueDiffer/IterableDiffer
+        let tagListState = JSON.stringify(this.tags.map(({ text: text, weight: weight }) => [ text, weight ])); // TODO: Improve performance, use KeyValueDiffer/IterableDiffer
         if (this._previousTagListState !== tagListState) {
             this._previousTagListState = tagListState;
             this.update();
