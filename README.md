@@ -2,6 +2,12 @@
 
 An Angular component wrapper for [goat1000's HTML5 canvas tag cloud](https://github.com/goat1000/TagCanvas).
 
+## Installation
+
+```
+npm i -s ng-tagcanvas
+```
+
 ## Usage example
 
 ```html

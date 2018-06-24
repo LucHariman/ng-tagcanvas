@@ -9,6 +9,10 @@
   ],
   "author": "Luc Hariman Randrianomenjanahary <luchariman@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucHariman/ng-tagcanvas"
+  },
   "scripts": {
     "packagr": "ng-packagr -p ng-package.json"
   },
