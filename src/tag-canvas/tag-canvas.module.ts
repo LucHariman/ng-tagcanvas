@@ -1,14 +1,14 @@
 import 'jquery-tagcanvas/tagcanvas';
 import { NgModule } from '@angular/core';
 import { TagCanvasComponent } from './tag-canvas.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
         TagCanvasComponent
     ],
     imports: [
-        BrowserModule
+        CommonModule
     ],
     exports: [
         TagCanvasComponent
