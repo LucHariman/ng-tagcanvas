@@ -16,7 +16,8 @@ export class TagCanvasComponent implements AfterViewInit, DoCheck, OnDestroy {
 
     readonly defaultOptions: TagCanvasOptions = {
         textFont: null,
-        textColour: null
+        textColour: null,
+        weightFrom: 'data-weight' // TODO: Hide this field from external modules
     };
 
     canvasWidth: number;

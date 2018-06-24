@@ -15,5 +15,5 @@ import { BrowserModule } from '@angular/platform-browser';
     ]
 })
 export class TagCanvasModule {
-    // TODO: Implement a forRoot() static method for initializing default options 
+    // TODO: For global options initialization, implement a forRoot() static method that accepts a TagCanvasOptions as a parameter
 }
