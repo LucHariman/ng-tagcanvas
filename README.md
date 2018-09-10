@@ -3,10 +3,24 @@
 An Angular component wrapper for [goat1000's HTML5 canvas tag cloud](https://github.com/goat1000/TagCanvas).
 
 ## Installation
-
+* Install ng-tagcanvas with npm
 ```
 npm i -s ng-tagcanvas
 ```
+* Then add TagCanvasModule to your app's module
+```ts
+...
+import { TagCanvasModule } from 'ng-tagcanvas';
+...
+@NgModule({
+...
+  imports: [
+...
+    TagCanvasModule
+  ]
+...
+```
+An example project is available here: https://github.com/LucHariman/ng-tagcanvas-example.
 
 ## Usage example
 
