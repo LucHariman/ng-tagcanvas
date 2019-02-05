@@ -20,7 +20,7 @@ import { TagCanvasModule } from 'ng-tagcanvas';
   ]
 ...
 ```
-An example project is available here: https://github.com/LucHariman/ng-tagcanvas-example.
+An example project is available here: https://github.com/LucHariman/ng-tagcanvas-example. Live [here](https://stackblitz.com/github/LucHariman/ng-tagcanvas-example)
 
 ## Usage example
 
