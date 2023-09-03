@@ -1,0 +1,24 @@
+{
+  "name": "ng-tagcanvas",
+  "version": "1.0.0-alpha",
+  "description": "An Angular component wrapper for goat1000's TagCanvas library.",
+  "keywords": [
+    "angular",
+    "tag cloud",
+    "tagcanvas"
+  ],
+  "author": "Luc Hariman Randrianomenjanahary <luchariman@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucHariman/ng-tagcanvas"
+  },
+  "peerDependencies": {
+    "@angular/common": "12.2.0 - 16",
+    "@angular/core": "12.2.0 - 16"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "jquery-tagcanvas": "^2.9.0"
+  }
+}
