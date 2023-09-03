@@ -22,7 +22,7 @@ jobs:
       
       - run: npm ci
 
-      - run: npm run build -- --base-href=/ng-tagcanvas
+      - run: npm run build -- --base-href /ng-tagcanvas/ --deploy-url /ng-tagcanvas/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
