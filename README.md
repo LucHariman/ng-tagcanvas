@@ -33,7 +33,7 @@ import { TagCanvasModule } from 'ng-tagcanvas';
 
 ## Demo
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/LucHariman/ng-tagcanvas)
+https://luchariman.github.io/ng-tagcanvas
 
 ## Changes compared to the version 0.x:
 
