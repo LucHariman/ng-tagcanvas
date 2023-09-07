@@ -52,14 +52,14 @@ export class TagCanvasComponent implements AfterViewInit {
     return this.canvas.nativeElement as HTMLCanvasElement;
   }
 
-  private readonly observer = new ResizeObserver(([ entry ]) => {
+  private readonly resizeObserver = new ResizeObserver(([ entry ]) => {
     const { width, height } = entry.contentRect;
     this.canvasElement.width = width;
     this.canvasElement.height = height;
   });
 
   ngAfterViewInit() {
-    this.observer.observe(this.canvasElement);
+    this.resizeObserver.observe(this.canvasElement);
     this.nativeTagCanvas.Start(
       this.canvasId,
       this.tagListId,
@@ -73,7 +73,7 @@ export class TagCanvasComponent implements AfterViewInit {
 
   ngOnDestroy(): void {
     this.nativeTagCanvas.Delete(this.canvasId);
-    this.observer.disconnect();
+    this.resizeObserver.disconnect();
   }
 
   // TODO: Update the TagCanvas when tags change.
