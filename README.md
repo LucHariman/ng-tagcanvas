@@ -3,13 +3,20 @@
 An Angular component wrapper for [goat1000's HTML5 canvas tag cloud](https://github.com/goat1000/TagCanvas), compatible with Angular version 12 and upward.
 
 ## Installation
-* Install `ng-tagcanvas` with npm
-```
+* Install `ng-tagcanvas` from npm registry
+
+If using npm:
+```bash
 npm install ng-tagcanvas
 ```
+
+If using yarn:
+```bash
+yarn add ng-tagcanvas
+```
+
 * Then add `TagCanvasModule` to your `AppModule`
 ```ts
-...
 import { TagCanvasModule } from 'ng-tagcanvas';
 ...
 @NgModule({
@@ -17,7 +24,8 @@ import { TagCanvasModule } from 'ng-tagcanvas';
   imports: [
     TagCanvasModule.forRoot()
   ]
-...
+})
+export class AppModule {}
 ```
 ## Usage example
 
