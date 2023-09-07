@@ -29,7 +29,7 @@ function generateRandomId(): string {
   ],
   template: `
     <canvas #canvas [attr.id]="canvasId"></canvas>
-    <div [attr.id]="tagListId" class="tag-container">
+    <div #tagContainer [attr.id]="tagListId" class="tag-container">
       <ng-content></ng-content>
     </div>
   `
@@ -46,10 +46,17 @@ export class TagCanvasComponent implements AfterViewInit {
   @ViewChild('canvas', { static: true })
   canvas!: ElementRef;
 
+  @ViewChild('tagContainer', { static: true })
+  tagContainer!: ElementRef;
+
   constructor(@Inject(NATIVE_TAGCANVAS) private readonly nativeTagCanvas: TagCanvas) {}
 
   private get canvasElement() {
     return this.canvas.nativeElement as HTMLCanvasElement;
+  }
+
+  private get tagContainerElement() {
+    return this.tagContainer.nativeElement as HTMLDivElement;
   }
 
   private readonly resizeObserver = new ResizeObserver(([ entry ]) => {
@@ -58,8 +65,13 @@ export class TagCanvasComponent implements AfterViewInit {
     this.canvasElement.height = height;
   });
 
+  private readonly mutationObserver = new MutationObserver(() => {
+    this.nativeTagCanvas.Update(this.canvasId);
+  });
+
   ngAfterViewInit() {
     this.resizeObserver.observe(this.canvasElement);
+    this.mutationObserver.observe(this.tagContainerElement, { childList: true });
     this.nativeTagCanvas.Start(
       this.canvasId,
       this.tagListId,
@@ -74,7 +86,6 @@ export class TagCanvasComponent implements AfterViewInit {
   ngOnDestroy(): void {
     this.nativeTagCanvas.Delete(this.canvasId);
     this.resizeObserver.disconnect();
+    this.mutationObserver.disconnect();
   }
-
-  // TODO: Update the TagCanvas when tags change.
 }
