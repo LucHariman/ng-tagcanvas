@@ -1,26 +1,51 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TagCanvasOptions } from 'ng-tagcanvas';
 
 @Component({
   selector: 'app-root',
+  styles: [
+    `
+      form {
+        max-width: 256px;
+        display: flex;
+        flex-direction: column;
+
+        input {
+          align-self: stretch;
+          margin-bottom: 8px;
+        }
+
+        button {
+          align-self: flex-end;
+          min-width: 128px;
+        }
+      }
+    `
+  ],
   template: `
+    <form [formGroup]="form" (submit)="addTag(form.value.tagName, form.value.weight); form.reset()">
+      <input type="text" formControlName="tagName" placeholder="Value" />
+      <input type="number" formControlName="weight" placeholder="Weight (from 1 to 50)" />
+      <button type="submit" [disabled]="form.invalid">Add tag</button>
+    </form>
     <ng-tag-canvas [options]="textTagCanvasOptions">
-      <a ngTag *ngFor="let text of texts; let i = index" [weight]="i * 4 + 10">{{ text }}</a>
+      <a ngTag *ngFor="let tag of tags; let i = index" [weight]="tag.weight">{{ tag.value }}</a>
     </ng-tag-canvas>
   `
 })
 export class AppComponent {
-  texts: string[] = [
-    'insurance',
-		'lay',
-		'tense',
-		'cabin',
-		'bomb',
-		'broadcast',
-		'portion',
-		'progress',
-		'match',
-		'cover',
+  readonly form = new FormGroup({
+    tagName: new FormControl('', Validators.required),
+    weight: new FormControl(undefined, [ Validators.required, Validators.min(1), Validators.max(50) ]),
+  });
+
+  tags: { value: string, weight: number }[] = [
+    { value: 'Go', weight: 20 },
+    { value: 'Typescript', weight: 45 },
+    { value: 'Java', weight: 25 },
+    { value: 'Python', weight: 30 },
+    { value: 'Rust', weight: 40 },
   ];
 
   textTagCanvasOptions: TagCanvasOptions = {
@@ -30,4 +55,8 @@ export class AppComponent {
     textColour: null,
     weight: true,
 	};
+
+  addTag(value: string, weight: number) {
+    this.tags.push({ value, weight });
+  }
 }
