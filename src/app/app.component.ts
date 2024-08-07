@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TagCanvasOptions } from 'ng-tagcanvas';
 
 @Component({
@@ -35,9 +35,9 @@ import { TagCanvasOptions } from 'ng-tagcanvas';
   `
 })
 export class AppComponent {
-  readonly form = new FormGroup({
-    tagName: new FormControl('', Validators.required),
-    weight: new FormControl(undefined, [ Validators.required, Validators.min(1), Validators.max(50) ]),
+  readonly form = new UntypedFormGroup({
+    tagName: new UntypedFormControl('', Validators.required),
+    weight: new UntypedFormControl(undefined, [ Validators.required, Validators.min(1), Validators.max(50) ]),
   });
 
   tags: { value: string, weight: number }[] = [
