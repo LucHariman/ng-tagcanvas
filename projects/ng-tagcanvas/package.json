@@ -1,6 +1,6 @@
 {
   "name": "ng-tagcanvas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An Angular component wrapper for goat1000's TagCanvas library.",
   "keywords": [
     "angular",
