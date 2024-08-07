@@ -9,20 +9,20 @@ import { TagDirective } from './tag.directive';
 import { TagCanvasOptions } from './tag-canvas-options';
 
 @NgModule({
-  declarations: [TagCanvasComponent, TagDirective],
+  declarations: [TagDirective, TagCanvasComponent],
   imports: [CommonModule],
   exports: [TagCanvasComponent, TagDirective],
 })
 export class TagCanvasModule {
-  static forRoot(config?: TagCanvasOptions): ModuleWithProviders<TagCanvasModule> {
+  static forRoot(
+    config?: TagCanvasOptions
+  ): ModuleWithProviders<TagCanvasModule> {
     // @ts-ignore
     const nativeTagCanvas = window['TagCanvas'];
     Object.assign(nativeTagCanvas, config || {});
     return {
       ngModule: TagCanvasModule,
-      providers: [
-        { provide: NATIVE_TAGCANVAS, useValue: nativeTagCanvas }
-      ]
+      providers: [{ provide: NATIVE_TAGCANVAS, useValue: nativeTagCanvas }],
     };
   }
 }

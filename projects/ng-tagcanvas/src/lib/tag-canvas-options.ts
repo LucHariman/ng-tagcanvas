@@ -24,7 +24,7 @@ export interface TagCanvasOptions {
   imageRadius?: number;
   imageScale?: number;
   imageVAlign?: 'middle' | 'top' | 'bottom';
-  initial?: null | [ number, number ];
+  initial?: null | [number, number];
   interval?: number;
   lock?: null | 'x' | 'y' | 'xy';
   maxBrightness?: number;
@@ -58,7 +58,7 @@ export interface TagCanvasOptions {
   scrollPause?: number;
   shadow?: string;
   shadowBlur?: number;
-  shadowOffset?: [ number, number ];
+  shadowOffset?: [number, number];
   shape?: 'sphere' | 'hcynlinder' | 'vcylinder' | 'hring' | 'vring';
   shuffleTags?: boolean;
   splitWidth?: number;
@@ -77,7 +77,13 @@ export interface TagCanvasOptions {
   weight?: boolean;
   weightFrom?: string;
   weightGradient?: WeightGradient | WeightGradient[];
-  weightMode?: 'size' | 'colour' | 'both' | 'bgcolour' | 'bgoutline' | 'outline';
+  weightMode?:
+    | 'size'
+    | 'colour'
+    | 'both'
+    | 'bgcolour'
+    | 'bgoutline'
+    | 'outline';
   weightSize?: number;
   weightSizeMax?: number;
   weightSizeMin?: number;
@@ -88,4 +94,4 @@ export interface TagCanvasOptions {
   zoomStep?: number;
 }
 
-export type WeightGradient = { [ index: number ]: string };
+export type WeightGradient = { [index: number]: string };

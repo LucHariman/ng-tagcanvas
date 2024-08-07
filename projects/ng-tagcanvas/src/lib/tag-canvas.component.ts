@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  ViewChild,
+} from '@angular/core';
 
 import { NATIVE_TAGCANVAS } from './native-tagcanvas.injector';
 import { TagCanvas } from './tag-canvas';
@@ -15,24 +22,24 @@ function generateRandomId(): string {
       :host {
         display: block;
       }
-      
+
       canvas {
         display: block;
         width: 100%;
         height: 100%;
       }
-      
+
       .tag-container {
         visibility: hidden;
-      }    
-    `
+      }
+    `,
   ],
   template: `
     <canvas #canvas [attr.id]="canvasId"></canvas>
     <div #tagContainer [attr.id]="tagListId" class="tag-container">
       <ng-content></ng-content>
     </div>
-  `
+  `,
 })
 export class TagCanvasComponent implements AfterViewInit {
   private readonly _instanceId = generateRandomId();
@@ -49,7 +56,9 @@ export class TagCanvasComponent implements AfterViewInit {
   @ViewChild('tagContainer', { static: true })
   tagContainer!: ElementRef;
 
-  constructor(@Inject(NATIVE_TAGCANVAS) private readonly nativeTagCanvas: TagCanvas) {}
+  constructor(
+    @Inject(NATIVE_TAGCANVAS) private readonly nativeTagCanvas: TagCanvas
+  ) {}
 
   private get canvasElement() {
     return this.canvas.nativeElement as HTMLCanvasElement;
@@ -59,7 +68,7 @@ export class TagCanvasComponent implements AfterViewInit {
     return this.tagContainer.nativeElement as HTMLDivElement;
   }
 
-  private readonly resizeObserver = new ResizeObserver(([ entry ]) => {
+  private readonly resizeObserver = new ResizeObserver(([entry]) => {
     const { width, height } = entry.contentRect;
     this.canvasElement.width = width;
     this.canvasElement.height = height;
@@ -71,12 +80,13 @@ export class TagCanvasComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.resizeObserver.observe(this.canvasElement);
-    this.mutationObserver.observe(this.tagContainerElement, { childList: true });
-    this.nativeTagCanvas.Start(
-      this.canvasId,
-      this.tagListId,
-      { weightFrom: 'data-weight', ...this.options },
-    );
+    this.mutationObserver.observe(this.tagContainerElement, {
+      childList: true,
+    });
+    this.nativeTagCanvas.Start(this.canvasId, this.tagListId, {
+      weightFrom: 'data-weight',
+      ...this.options,
+    });
   }
 
   setSpeed(speed: [number] | [number, number]) {
